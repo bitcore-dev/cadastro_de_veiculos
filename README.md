@@ -19,11 +19,6 @@ O sistema foi planejado para trabalhar com veículos de diferentes categorias, p
 * 🚗 Carros
 * 🏍️ Motocicletas
 * 🚚 Caminhões
-* 🚐 Vans
-* 🚌 Ônibus
-* 🚜 Tratores
-* 🚛 Utilitários
-* ➕ Outros veículos
 
 A aplicação será desenvolvida utilizando uma estrutura organizada, responsiva e preparada para receber novas funcionalidades relacionadas ao gerenciamento de frotas.
 
@@ -59,9 +54,6 @@ O sistema deverá possuir:
 * Exclusão;
 * Classificação por tipo de veículo;
 * Cadastros complementares;
-* Controle de manutenção;
-* Controle de revisões;
-* Controle de documentação;
 * Relatórios;
 * Django Admin;
 * Interface responsiva utilizando Bootstrap 5.
@@ -157,7 +149,7 @@ Criar o aplicativo responsável pelas funcionalidades principais do sistema.
 Aplicação inicialmente utilizada:
 
 ```text
-core
+FleetCard
 ```
 
 O aplicativo será responsável por organizar as funcionalidades, Views, URLs, Models, Templates e demais componentes necessários.
@@ -178,12 +170,10 @@ O modelo deverá armazenar as principais informações necessárias para identif
 | Marca            | CharField ou relacionamento |
 | Modelo           | CharField                   |
 | Placa            | CharField                   |
-| RENAVAM          | CharField                   |
 | Ano              | IntegerField                |
 | Cor              | CharField ou relacionamento |
 | Combustível      | ChoiceField / CharField     |
 | Quilometragem    | IntegerField                |
-| Status           | ChoiceField / CharField     |
 | Observações      | TextField                   |
 | Data de cadastro | DateTimeField               |
 
@@ -202,22 +192,17 @@ O painel administrativo deverá permitir:
 * Editar veículos;
 * Excluir veículos;
 * Pesquisar informações;
-* Filtrar registros;
-* Organizar a apresentação dos dados.
 
 ### Pesquisas previstas
 
 * Placa;
 * Modelo;
 * Marca;
-* RENAVAM.
 
 ### Filtros previstos
 
 * Tipo de veículo;
 * Marca;
-* Combustível;
-* Status.
 
 ---
 
@@ -230,7 +215,9 @@ O sistema deverá possuir as seguintes páginas:
 * Novo Veículo;
 * Editar Veículo;
 * Excluir Veículo;
-* Detalhes do Veículo.
+* Detalhes do Veículo;
+* Contatos;
+* Sobre.
 
 Também poderão ser criadas páginas específicas para as funcionalidades complementares.
 
@@ -262,8 +249,7 @@ O Template Base deverá conter:
 * CSS do projeto;
 * Sidebar;
 * Área de conteúdo;
-* Footer;
-* JavaScript do Bootstrap.
+* Footer.
 
 ---
 
@@ -301,15 +287,11 @@ CADASTROS
 └── Cores
 
 CONTROLE
-├── Manutenção
-├── Revisões
 ├── Quilometragem
 └── Documentação
 
 RELATÓRIOS
-├── Relatório de veículos
-├── Relatório de manutenção
-└── Relatório de documentação
+└── Relatório de veículos
 
 SISTEMA
 ├── Configurações
@@ -340,8 +322,6 @@ A tela de listagem deverá apresentar os principais dados dos veículos.
 | Ano           | Ano                   |
 | Combustível   | Tipo de combustível   |
 | Quilometragem | Quilometragem atual   |
-| Status        | Situação do veículo   |
-| Ações         | Operações disponíveis |
 
 ---
 
@@ -368,12 +348,10 @@ Tipo
 Marca
 Modelo
 Placa
-RENAVAM
 Ano
 Cor
 Combustível
 Quilometragem
-Status
 Observações
 Data de cadastro
 ```
@@ -398,22 +376,6 @@ Motocicletas e veículos de duas rodas.
 
 Veículos destinados principalmente ao transporte de cargas.
 
-### 🚐 Van e Utilitário
-
-Veículos destinados ao transporte de pessoas, cargas ou utilização comercial.
-
-### 🚌 Ônibus
-
-Veículos destinados ao transporte coletivo de passageiros.
-
-### 🚜 Trator e Máquina
-
-Veículos e máquinas utilizados em atividades específicas.
-
-### ➕ Outro
-
-Permite representar outros tipos de veículos que não estejam nas categorias anteriores.
-
 ---
 
 # 8. Cadastro de Veículo
@@ -428,6 +390,8 @@ Exemplo:
 Tipo de veículo
 [ Carro ▼ ]
 
+[ Adicionar imagem do veículo ]
+
 Marca
 [ __________________ ]
 
@@ -435,9 +399,6 @@ Modelo
 [ __________________ ]
 
 Placa
-[ __________________ ]
-
-RENAVAM
 [ __________________ ]
 
 Ano
@@ -452,9 +413,6 @@ Combustível
 Quilometragem
 [ __________________ ]
 
-Status
-[ __________________ ]
-
 Observações
 [ __________________ ]
 
@@ -465,12 +423,7 @@ O mesmo formulário poderá ser utilizado para:
 
 * Carro;
 * Moto;
-* Caminhão;
-* Van;
-* Ônibus;
-* Trator;
-* Utilitário;
-* Outro.
+* Caminhão.
 
 ---
 
@@ -559,22 +512,7 @@ Permitir organizar as cores utilizadas nos veículos.
 
 ---
 
-# 11. Controle de Manutenção
-
-Como evolução do sistema, o FleetCard deverá permitir registrar informações relacionadas à manutenção dos veículos.
-
-Exemplos:
-
-* Data da manutenção;
-* Tipo de manutenção;
-* Descrição;
-* Quilometragem;
-* Valor;
-* Observações.
-
----
-
-# 12. Controle de Revisões
+# 11. Controle de Revisões
 
 O sistema poderá registrar revisões realizadas e previstas.
 
@@ -834,27 +772,21 @@ O menu lateral será desenvolvido utilizando o componente **Offcanvas do Bootstr
 ┌─────────────────────────┐
 │ 🚗 FleetCard         ×  │
 ├─────────────────────────┤
-│ 🏠 Dashboard            │
-│                         │
 │ 🚗 VEÍCULOS             │
 │    Cadastrar veículo    │
 │    Lista de veículos    │
-│    Consultar veículo   │
+│    Consultar veículo    │
 │                         │
-│ 🏷️ CADASTROS            │
+│ 🏷️ CADASTROS           │
 │    Marcas               │
 │    Categorias           │
 │    Combustíveis         │
 │    Cores                │
 │                         │
-│ 🔧 CONTROLE             │
-│    Manutenção           │
-│    Revisões             │
-│    Documentação         │
 │                         │
-│ 📊 RELATÓRIOS           │
+│ 📞 Contatos             |
 │                         │
-│ ⚙️ SISTEMA              │
+│ ℹ️ Sobre                │
 └─────────────────────────┘
 ```
 
@@ -878,12 +810,8 @@ urlpatterns = [
 
 * Cadastro;
 * Listagem;
-* Detalhes;
 * Edição;
-* Exclusão;
-* Manutenção;
-* Relatórios;
-* Cadastros complementares.
+* Exclusão.
 
 ---
 
@@ -942,30 +870,32 @@ O Admin será utilizado para facilitar o gerenciamento dos registros durante o d
 # 26. Fluxo Principal do Sistema
 
 ```text
-                    FLEETCARD
-                        │
-                        ↓
-                     HOME
-                        │
-                        ↓
-                      ☰ MENU
-                        │
-          ┌─────────────┼─────────────┐
-          ↓             ↓             ↓
-      VEÍCULOS      CADASTROS      CONTROLE
-          │             │             │
-          ↓             ↓             ↓
-     Cadastrar       Marcas       Manutenção
-     Listar          Categorias   Revisões
-     Consultar       Combustíveis Documentação
-     Editar          Cores        Quilometragem
-     Excluir
-          │
-          ↓
-      BANCO DE DADOS
-          │
-          ↓
-        RELATÓRIOS
+
+FLEETCARD
+    │
+    ↓
+  HOME
+    │
+    ↓
+  ☰ MENU
+    │
+    ┌─────────────┐
+    ↓             ↓
+VEÍCULOS      CADASTRAR
+    │             │
+    ↓             ↓
+  Marcas       Cadastrar
+Categorias     Listar
+  Cores        Editar
+    │          Excluir
+    │          
+    │
+    ↓
+BANCO DE DADOS
+    │
+    ↓
+RELATÓRIOS
+
 ```
 
 ---
@@ -981,6 +911,8 @@ O Admin será utilizado para facilitar o gerenciamento dos registros durante o d
 * [x] Criar `home.html`;
 * [x] Criar `navbar.html`;
 * [x] Criar `footer.html`;
+* [ ] Criar `contatos.html`
+* [ ] Criar `sobre.html`
 * [x] Configurar Bootstrap;
 * [x] Configurar Bootstrap Icons;
 * [x] Criar `style.css`.
@@ -989,11 +921,11 @@ O Admin será utilizado para facilitar o gerenciamento dos registros durante o d
 
 ## Etapa 2 — Navegação
 
-* [ ] Implementar Sidebar;
-* [ ] Implementar botão hambúrguer;
+* [x] Implementar Sidebar;
+* [x] Implementar botão hambúrguer;
 * [ ] Organizar menu por categorias;
 * [ ] Criar links para as funcionalidades;
-* [ ] Testar responsividade.
+* [x] Testar responsividade.
 
 ---
 
@@ -1047,16 +979,7 @@ O Admin será utilizado para facilitar o gerenciamento dos registros durante o d
 
 ---
 
-## Etapa 8 — Controle
-
-* [ ] Manutenção;
-* [ ] Revisões;
-* [ ] Quilometragem;
-* [ ] Documentação.
-
----
-
-## Etapa 9 — Relatórios
+## Etapa 8 — Relatórios
 
 * [ ] Relatório geral;
 * [ ] Relatório por tipo;
@@ -1101,8 +1024,6 @@ main
 ```
 
 A branch `main` será utilizada para versões estáveis.
-
-A branch `develop` será utilizada para desenvolvimento e testes.
 
 As funcionalidades poderão ser desenvolvidas em branches específicas antes de serem integradas.
 
@@ -1166,7 +1087,7 @@ O **FleetCard** propõe uma solução web para centralizar o cadastro e gerencia
 
 A utilização de **Python, Django, ORM, SQLite, Bootstrap e Django Admin** permitirá desenvolver uma aplicação estruturada e responsiva.
 
-O sistema será preparado para trabalhar com diferentes tipos de veículos, possibilitando sua utilização em cenários que envolvam carros, motocicletas, caminhões, vans, ônibus, tratores, utilitários e outros veículos.
+O sistema será preparado para trabalhar com diferentes tipos de veículos, possibilitando sua utilização em cenários que envolvam carros, motocicletas e caminhões.
 
 A arquitetura também permitirá a evolução do projeto para funcionalidades de manutenção, revisões, documentação e relatórios.
 
